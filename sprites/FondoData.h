@@ -57,16 +57,16 @@
 #define fondoDataCGBPal0c3 0
 
 /* Gameboy Color palette 1 */
-#define fondoDataCGBPal1c0 6076
-#define fondoDataCGBPal1c1 8935
-#define fondoDataCGBPal1c2 6596
-#define fondoDataCGBPal1c3 5344
+#define fondoDataCGBPal1c0 32767
+#define fondoDataCGBPal1c1 12283
+#define fondoDataCGBPal1c2 25952
+#define fondoDataCGBPal1c3 0
 
 /* Gameboy Color palette 2 */
-#define fondoDataCGBPal2c0 6076
+#define fondoDataCGBPal2c0 32767
 #define fondoDataCGBPal2c1 8935
-#define fondoDataCGBPal2c2 6596
-#define fondoDataCGBPal2c3 5344
+#define fondoDataCGBPal2c2 1473
+#define fondoDataCGBPal2c3 1390
 
 /* Gameboy Color palette 3 */
 #define fondoDataCGBPal3c0 6076

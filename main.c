@@ -12,7 +12,17 @@ const UWORD backgroundPalletes[] = {
     fondoDataCGBPal0c0,
     fondoDataCGBPal0c1,
     fondoDataCGBPal0c2,
-    fondoDataCGBPal0c3
+    fondoDataCGBPal0c3,
+
+    fondoDataCGBPal1c0,
+    fondoDataCGBPal1c1,
+    fondoDataCGBPal1c2,
+    fondoDataCGBPal1c3,
+
+    fondoDataCGBPal2c0,
+    fondoDataCGBPal2c1,
+    fondoDataCGBPal2c2,
+    fondoDataCGBPal2c3
 };
 
 const UWORD spritePalletes[] = {
@@ -40,6 +50,7 @@ void moveGameCharacter(Personaje* character, UINT8 x, UINT8 y);
 void animatePLayer(Personaje* character, UINT8 animationType);
 void moveGameEnemy(Personaje* character, UINT8 x, UINT8 y);
 void animateEnemy(Personaje* character, UINT8 animationType);
+UBYTE canPlayerMove(UINT8 x, UINT8 y);
 
 void main(){
     BYTE enemyDir = 1;
@@ -79,7 +90,7 @@ void performanDelay(UINT8 numloops){
 }
 
 void initMenuBackground(){
-    set_bkg_palette(0, 1, &backgroundPalletes[0]);
+    set_bkg_palette(0, 3, &backgroundPalletes[0]);
     set_bkg_data(0, 15, fondoData);
 
     VBK_REG = 1;
@@ -293,29 +304,41 @@ void animateEnemy(Personaje* character, UINT8 animationType){
     }
 }
 
+UBYTE canPlayerMove(UINT8 newX, UINT8 newY){
+    return(newX>5 && newX<90 && newY>63 && newY<129);
+}
+
 void checkInput(){
     if(joypad() & J_RIGHT){
-        jugador.posX += 1;
-        moveGameCharacter(&jugador, jugador.posX, jugador.posY);
-        animatePLayer(&jugador, 1);
-        animationDelay++;
+        if(canPlayerMove(jugador.posX + 1, jugador.posY)){
+            jugador.posX += 1;
+            moveGameCharacter(&jugador, jugador.posX, jugador.posY);
+            animatePLayer(&jugador, 1);
+            animationDelay++;
+        }
     }
     if(joypad() & J_LEFT){
-        jugador.posX -= 1;
-        moveGameCharacter(&jugador, jugador.posX, jugador.posY);
-        animatePLayer(&jugador, 1);
-        animationDelay++;
+        if(canPlayerMove(jugador.posX - 1, jugador.posY)){
+            jugador.posX -= 1;
+            moveGameCharacter(&jugador, jugador.posX, jugador.posY);
+            animatePLayer(&jugador, 1);
+            animationDelay++;
+        }
     }
     if(joypad() & J_UP){
-        jugador.posY -= 1;
-        moveGameCharacter(&jugador, jugador.posX, jugador.posY);
-        animatePLayer(&jugador, 1);
-        animationDelay++;
+        if(canPlayerMove(jugador.posX, jugador.posY - 1)){
+            jugador.posY -= 1;
+            moveGameCharacter(&jugador, jugador.posX, jugador.posY);
+            animatePLayer(&jugador, 1);
+            animationDelay++;
+        }
     }
     if(joypad() & J_DOWN){
-        jugador.posY += 1;
-        moveGameCharacter(&jugador, jugador.posX, jugador.posY);
-        animatePLayer(&jugador, 1);
-        animationDelay++;
+        if(canPlayerMove(jugador.posX, jugador.posY + 1)){
+            jugador.posY += 1;
+            moveGameCharacter(&jugador, jugador.posX, jugador.posY);
+            animatePLayer(&jugador, 1);
+            animationDelay++;
+        }
     }
 }
